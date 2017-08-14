@@ -1,0 +1,181 @@
+<!-- md -> manual decipher -->
+<!-- ad -> auto decipher -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Caesar Cipher</title>
+
+<style type="text/css">
+	body{
+		 background-color: gray;
+	}
+	input{
+		border:1px solid black;
+		padding:5px;
+		border-radius: 10px;
+		width:200px;
+		transition-duration: 1s;
+	}
+	input:focus{
+		width:300px;
+		transition-duration: 1s;
+	}
+</style>
+
+<script type="text/javascript">
+	var count=0;
+	function length_of_msg(){
+		// alert("x");
+		count++;
+	}
+	function show_length(){
+		document.getElementById("length").innerHTML="<br/>You Pressed Key: "+count+" Times";
+		document.getElementById("lengths").innerHTML="<br/>You Pressed Key: "+count+" Times";
+	}
+	function caesarcipher(){
+		var cipher_text=[];
+		var plain_text=document.getElementById("plain").value;
+		var key=document.getElementById("key").value;
+		var act_key = parseInt(key%26);
+		// alert("Key is"+act_key);
+		var total_length_of_msg=plain_text.length;
+		// alert(total_length_of_msg);
+		var i;
+		var cip_txt= "";
+		for (i = 0 ; i < total_length_of_msg ; i ++){
+			// alert(plain_text.charCodeAt(i));
+			cipher_text[i]=plain_text.charCodeAt(i)+act_key;
+			// alert(cipher_text[i]);
+			cip_txt += String.fromCharCode(cipher_text[i]);
+		}		
+		document.getElementById("cipher").value = cip_txt;
+		// return false;
+	}
+	function decipher(){
+		var ad_plain_text = [];
+		var ad_cipher_text = document.getElementById("ad_cipher").value;
+		var ad_key = document.getElementById("ad_key").value;
+		var ad_act_key = parseInt(ad_key%26);
+		// alert("Key is"+ad_act_key);
+		var ad_total_length_of_msg = ad_cipher_text.length;
+		// alert(ad_total_length_of_msg);
+		var k;
+		var ad_pln_txt = "";
+		// alert(k);
+		for (k = 0 ; k < ad_total_length_of_msg ; k ++) {
+			// alert(k);
+			//alert(ad_plain_text.charCodeAt(k));
+			ad_plain_text[k] = ad_cipher_text.charCodeAt(k)-ad_act_key;
+			// alert(ad_cipher_text[k]);
+			ad_pln_txt += String.fromCharCode(ad_plain_text[k]);
+		}
+		// alert("fini");
+		document.getElementById("ad_plain").value = ad_pln_txt;
+		// return false;
+	}
+	function manualdecipher(){
+		var md_plain_text = [];
+		var md_cipher_text = document.getElementById("md_cipher").value;
+		var md_key = document.getElementById("md_key").value;
+		var md_act_key = parseInt(md_key%26);
+		// alert("Key is"+md_act_key);
+		var md_total_length_of_msg = md_cipher_text.length;
+		// alert(md_total_length_of_msg);
+		var l;
+		var md_pln_txt = "";
+		// alert(k);
+		for (l = 0 ; l < md_total_length_of_msg ; l ++) {
+			// alert(k);
+			//alert(md_plain_text.charCodeAt(k));
+			md_plain_text[l] = md_cipher_text.charCodeAt(l)-md_act_key;
+			// alert(md_cipher_text[k]);
+			md_pln_txt += String.fromCharCode(md_plain_text[l]);
+		}
+		// alert("fini");
+		document.getElementById("md_plain").value = md_pln_txt;
+		// return false;
+	}
+	function manualcipher(){
+		var m_cipher_text=[];
+		var m_plain_text=document.getElementById("m_plain").value;
+		var m_key=document.getElementById("m_key").value;
+		var m_actu_key = m_key % 26;
+		var m_act_key = parseInt(m_actu_key);
+		// alert("Key is "+m_act_key);
+		var m_total_length_of_msg=m_plain_text.length;
+		// alert(m_total_length_of_msg);
+		var j;
+		var m_cip_txt= "";
+		for (j = 0 ; j < m_total_length_of_msg ; j++){
+			// alert(m_plain_text.charCodeAt(j));
+			m_cipher_text[j]=m_plain_text.charCodeAt(j)+m_act_key;
+			// alert(cipher_text[i]);
+			m_cip_txt += String.fromCharCode(m_cipher_text[j]);
+		}		
+		document.getElementById("m_cipher").value = m_cip_txt;
+		// return false;
+	}
+</script>
+</head>
+
+<body>
+	<div id="auto" style="float:left; margin:50px;">
+	<h3>Caesar Cipher</h3>
+	<form method="POST">
+		Enter Plain Text : <br/>
+		<input type="text" id="plain" name="plain" required=""><span id="length"></span>
+		<hr/>Key : <br/>
+		<input type="text" name="key" id="key" disabled="" value="3">
+		<hr/>
+		<input type="button" id="submit" value="Submit" onclick="caesarcipher()">
+		<hr/>Cipher Text Is : <br/>
+		<input type="text" name="cipher" id="cipher" disabled="">		
+	</form>
+	</div>
+
+	<div id="decipher" style="float:left; margin:50px;">
+	<h3>Caesar De-Cipher</h3>
+	<form method="POST">
+		Enter Cipher Text : <br/>
+		<input type="text" id="ad_cipher" required="">
+		<hr/>Key : <br/>
+		<input type="text" id="ad_key" disabled="" value="3">
+		<hr/>
+		<input type="button" id="ad_submit" value="Submit" onclick="decipher()">
+		<hr/>Plain Text Is : <br/>
+		<input type="text" name="ad_plain" id="ad_plain" disabled="">		
+	</form>
+	</div>
+
+	<div id="manual" style="float:left; margin:50px;">
+	<h3>Manual Cipher</h3>
+	<form method="POST">
+		Enter Plain Text : <br/>
+		<input type="text" id="m_plain" name="m_plain" required=""><span id="lengths"></span>
+		<hr/>Key : <br/>
+		<input type="text" name="m_key" id="m_key">
+		<hr/>
+		<input type="button" id="m_submit" value="Submit" onclick="manualcipher()">
+		<hr/>Cipher Text Is : <br/>
+		<input type="text" name="m_cipher" id="m_cipher" disabled="">		
+	</form>
+	</div>
+
+	<div id="manual_decipher" style="float:left; margin:50px;">
+	<h3>Manual De-Cipher</h3>
+	<form method="POST">
+
+		Enter Cipher Text : <br/>
+		<input type="text" id="md_cipher" name="md_cipher" required=""><span id="lengths"></span>
+		<hr/>Key : <br/>
+		<input type="text" name="md_key" id="md_key">
+		<hr/>
+		<input type="button" id="md_submit" value="Submit" onclick="manualdecipher()">
+		<hr/>Plain Text Is : <br/>
+		<input type="text" name="md_plain" id="md_plain" disabled="">
+	</form>
+	</div>
+
+</body>
+
+</html>
